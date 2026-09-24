@@ -25,7 +25,7 @@
   <!-- Audio Nhạc Nền -->
   <audio id="bg-audio" loop preload="auto" src="music.mp3"></audio>
 
-  <!-- Nút điều khiển nổi (Nhạc, Cánh hoa) -->
+  <!-- Nút điều khiển nổi (Nhạc, Cánh hoa, Tạo link khách) -->
   <div class="floating-controls">
     <button class="float-btn music-btn" id="music-toggle-btn" title="Bật/Tắt nhạc nền" aria-label="Bật/Tắt nhạc nền">
       <i class="fa-solid fa-compact-disc"></i>
@@ -33,6 +33,9 @@
     <button class="float-btn" id="petals-toggle-btn" title="Bật/Tắt hoa rơi" aria-label="Bật/Tắt hoa rơi">
       <i class="fa-solid fa-wand-magic-sparkles"></i>
     </button>
+    <a href="tao-link.html" class="float-btn" id="btn-goto-link-gen" title="Tạo link mời riêng cho khách" aria-label="Tạo link mời khách" style="text-decoration: none; color: inherit; display: flex; align-items: center; justify-content: center;">
+      <i class="fa-solid fa-paper-plane"></i>
+    </a>
   </div>
 
   <!-- Nút Thay Ảnh & Chỉnh Sửa Nhanh -->
@@ -429,6 +432,9 @@ Hẹn gặp bạn trong ngày vui nhé!
         <button class="btn-customizer-export" id="btn-customizer-export">
           <i class="fa-solid fa-download"></i> Xuất file config.js
         </button>
+        <a href="tao-link.html" class="btn-customizer-export" style="text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 6px; background: #0068ff; color: #fff;">
+          <i class="fa-solid fa-paper-plane"></i> Tạo link mời khách
+        </a>
       </div>
     </div>
   </div>

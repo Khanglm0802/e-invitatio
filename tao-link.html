@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Công Cụ Tạo Link Mời Khách - Thiệp Điện Tử</title>
+  
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary: #173A63;
+      --primary-dark: #101e3d;
+      --accent-gold: #C9A45D;
+      --accent-gold-dark: #ab853b;
+      --bg-page: #0f172a;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border-color: #e2e8f0;
+      --radius: 16px;
+      --shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #0b1329 0%, #172554 50%, #0f172a 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 24px 16px 60px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header-card {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 20px;
+      padding: 10px;
+    }
+
+    .badge-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(201, 164, 93, 0.2);
+      border: 1px solid rgba(201, 164, 93, 0.4);
+      color: #fce7b0;
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      color: #ffffff;
+    }
+
+    .header-desc {
+      color: #94a3b8;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Tabs */
+    .tabs-wrapper {
+      display: flex;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 5px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 14px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s ease;
+      font-family: inherit;
+    }
+
+    .tab-btn.active {
+      background: var(--card-bg);
+      color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Main Box */
+    .card-box {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid var(--border-color);
+      border-radius: 10px;
+      font-size: 15px;
+      color: var(--text-main);
+      font-family: inherit;
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent-gold);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(201, 164, 93, 0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 110px;
+      line-height: 1.6;
+    }
+
+    .helper-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 5px;
+    }
+
+    /* Action Buttons */
+    .btn-submit {
+      width: 100%;
+      padding: 13px 18px;
+      background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(23, 58, 99, 0.25);
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-submit:hover {
+      opacity: 0.95;
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    /* Result Preview Area */
+    .result-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px dashed var(--border-color);
+      display: none;
+    }
+
+    .result-section.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .link-display-box {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #0f172a;
+      word-break: break-all;
+      margin-bottom: 12px;
+      font-family: monospace;
+    }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .btn-action {
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-copy {
+      background: #e2e8f0;
+      color: #1e293b;
+    }
+
+    .btn-copy:hover {
+      background: #cbd5e1;
+    }
+
+    .btn-view {
+      background: #fef3c7;
+      color: #92400e;
+      border: 1px solid #fde68a;
+    }
+
+    .btn-view:hover {
+      background: #fde68a;
+    }
+
+    .btn-zalo {
+      grid-column: span 2;
+      background: #0068ff;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(0, 104, 255, 0.25);
+    }
+
+    .btn-zalo:hover {
+      background: #0056d6;
+    }
+
+    /* Batch List Table */
+    .batch-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .guest-card-item {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .guest-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .guest-name-text {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--primary);
+      margin-bottom: 2px;
+    }
+
+    .guest-link-snippet {
+      font-size: 11px;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 250px;
+    }
+
+    .guest-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-icon-sm {
+      padding: 7px 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      color: #334155;
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      font-family: inherit;
+    }
+
+    .btn-icon-sm:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      z-index: 9999;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .back-home {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .back-home a {
+      color: #cbd5e1;
+      font-size: 13px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .back-home a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Header -->
+    <div class="header-card">
+      <div class="badge-tag">
+        <i class="fa-solid fa-sparkles"></i> Công Cụ Tạo Thư Mời Nhanh
+      </div>
+      <h1 class="header-title">Tạo Link Thiệp Cho Khách</h1>
+      <p class="header-desc">
+        Nhập tên khách mời để tạo đường link riêng hiển thị đúng tên người đó trên thiệp!
+      </p>
+    </div>
+
+    <!-- Tabs chuyển đổi -->
+    <div class="tabs-wrapper">
+      <button class="tab-btn active" id="tab-single-btn" onclick="switchTab('single')">
+        <i class="fa-solid fa-user"></i> Tạo Cho 1 Người
+      </button>
+      <button class="tab-btn" id="tab-batch-btn" onclick="switchTab('batch')">
+        <i class="fa-solid fa-users"></i> Tạo Hàng Loạt
+      </button>
+    </div>
+
+    <!-- TAB 1: TẠO CHO 1 NGƯỜI -->
+    <div class="card-box" id="panel-single">
+      <form id="form-single" onsubmit="event.preventDefault(); generateSingleLink();">
+        <div class="form-group">
+          <label class="form-label" for="guest-name-input">Tên khách mời <span style="color:#ef4444;">*</span></label>
+          <input type="text" id="guest-name-input" class="form-input" placeholder="Ví dụ: Anh Hoàng & Chị Lan, Bạn Linh,..." required />
+          <div class="helper-text">Tên này sẽ hiện nổi bật ở phần Lời mời trang trọng trên thiệp.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="greeting-select">Lời xưng hô / Lời mời</label>
+          <select id="greeting-select" class="form-select">
+            <option value="TRÂN TRỌNG KÍNH MỜI">TRÂN TRỌNG KÍNH MỜI (Mặc định)</option>
+            <option value="THÂN MỜI">THÂN MỜI (Dành cho bạn bè thân thiết)</option>
+            <option value="THƯƠNG MỜI">THƯƠNG MỜI (Ấm áp, gần gũi)</option>
+            <option value="KÍNH MỜI">KÍNH MỜI (Thầy cô, người lớn tuổi)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="fa-solid fa-link"></i> Tạo Link Thiệp Ngay
+        </button>
+      </form>
+
+      <!-- Kết quả hiển thị cho 1 người -->
+      <div class="result-section" id="result-single">
+        <div class="result-header">
+          <i class="fa-solid fa-circle-check" style="color: #10b981;"></i> Link thiệp của bạn đã sẵn sàng:
+        </div>
+        <div class="link-display-box" id="single-link-url"></div>
+
+        <div class="btn-row">
+          <button class="btn-action btn-copy" onclick="copySingleLink()">
+            <i class="fa-regular fa-copy"></i> Sao chép Link
+          </button>
+          <a href="#" target="_blank" class="btn-action btn-view" id="btn-view-preview">
+            <i class="fa-solid fa-arrow-up-right-from-square"></i> Xem thử thiệp
+          </a>
+          <button class="btn-action btn-zalo" onclick="shareViaApp()">
+            <i class="fa-solid fa-share-nodes"></i> Sao chép tin nhắn gửi bạn bè
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: TẠO HÀNG LOẠT -->
+    <div class="card-box" id="panel-batch" style="display: none;">
+      <form id="form-batch" onsubmit="event.preventDefault(); generateBatchLinks();">
+        <div class="form-group">
+          <label class="form-label" for="batch-names-input">Danh sách tên khách mời (Mỗi người 1 dòng)</label>
+          <textarea id="batch-names-input" class="form-textarea" placeholder="Anh Hoàng&#10;Chị Linh&#10;Bạn Tuấn Cấp 3&#10;Gia đình Bác Hải" required></textarea>
+          <div class="helper-text">Mẹo: Bạn có thể copy một cột tên từ file Excel và dán trực tiếp vào đây.</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="batch-greeting-select">Lời xưng hô chung</label>
+          <select id="batch-greeting-select" class="form-select">
+            <option value="TRÂN TRỌNG KÍNH MỜI">TRÂN TRỌNG KÍNH MỜI</option>
+            <option value="THÂN MỜI">THÂN MỜI</option>
+            <option value="THƯƠNG MỜI">THƯƠNG MỜI</option>
+            <option value="KÍNH MỜI">KÍNH MỜI</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="fa-solid fa-list-check"></i> Tạo Toàn Bộ Danh Sách Link
+        </button>
+      </form>
+
+      <!-- Kết quả danh sách hàng loạt -->
+      <div class="result-section" id="result-batch">
+        <div class="batch-summary">
+          <span id="batch-count-text">Tổng cộng: 0 khách</span>
+          <button class="btn-icon-sm" onclick="copyAllBatchLinks()">
+            <i class="fa-regular fa-copy"></i> Copy tất cả
+          </button>
+        </div>
+        <div id="batch-list-container">
+          <!-- Render danh sách khách -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Nút trở về trang thiệp -->
+    <div class="back-home">
+      <a href="index.html">
+        <i class="fa-solid fa-arrow-left"></i> Quay lại xem giao diện Thiệp Mời
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Toast Thông báo -->
+  <div class="toast" id="toast">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toast-text">Đã sao chép vào bộ nhớ tạm!</span>
+  </div>
+
+  <script>
+    // Lấy Domain hiện tại của web (dù chạy Vercel hay Localhost đều chuẩn 100%)
+    function getBaseUrl() {
+      const origin = window.location.origin;
+      const pathname = window.location.pathname.replace(/\/tao-link(\.html)?$/, '');
+      const cleanPath = pathname.endsWith('/') ? pathname.slice(0, -1) : pathname;
+      return origin + cleanPath;
+    }
+
+    let currentGeneratedUrl = '';
+    let currentGuestName = '';
+    let currentBatchData = [];
+
+    // Chuyển tab
+    function switchTab(tab) {
+      const panelSingle = document.getElementById('panel-single');
+      const panelBatch = document.getElementById('panel-batch');
+      const tabSingle = document.getElementById('tab-single-btn');
+      const tabBatch = document.getElementById('tab-batch-btn');
+
+      if (tab === 'single') {
+        panelSingle.style.display = 'block';
+        panelBatch.style.display = 'none';
+        tabSingle.classList.add('active');
+        tabBatch.classList.remove('active');
+      } else {
+        panelSingle.style.display = 'none';
+        panelBatch.style.display = 'block';
+        tabSingle.classList.remove('active');
+        tabBatch.classList.add('active');
+      }
+    }
+
+    // Tạo link cho 1 người
+    function generateSingleLink() {
+      const name = document.getElementById('guest-name-input').value.trim();
+      const greeting = document.getElementById('greeting-select').value;
+      if (!name) return;
+
+      const base = getBaseUrl();
+      const mainPage = base ? `${base}/index.html` : 'index.html';
+      const url = `${mainPage}?guest=${encodeURIComponent(name)}&greeting=${encodeURIComponent(greeting)}`;
+
+      currentGeneratedUrl = url;
+      currentGuestName = name;
+
+      document.getElementById('single-link-url').textContent = url;
+      document.getElementById('btn-view-preview').href = url;
+      document.getElementById('result-single').classList.add('active');
+
+      showToast(`Đã tạo link mời cho: ${name}`);
+    }
+
+    // Sao chép link 1 người
+    function copySingleLink() {
+      if (!currentGeneratedUrl) return;
+      navigator.clipboard.writeText(currentGeneratedUrl).then(() => {
+        showToast('Đã sao chép link thiệp vào bộ nhớ tạm!');
+      }).catch(() => {
+        prompt('Hãy copy đường link bên dưới:', currentGeneratedUrl);
+      });
+    }
+
+    // Chia sẻ / Copy tin nhắn gửi bạn bè
+    function shareViaApp() {
+      if (!currentGeneratedUrl) return;
+      const msg = `Thương gửi ${currentGuestName},\nMình xin gửi thiệp mời tham dự ngày vui của mình nhé! Bạn mở link này để xem thiệp và xác nhận giúp mình nha:\n👉 ${currentGeneratedUrl}`;
+      navigator.clipboard.writeText(msg).then(() => {
+        showToast('Đã sao chép lời nhắn kèm link! Hãy dán vào Zalo/Messenger.');
+      }).catch(() => {
+        prompt('Copy lời nhắn gửi bạn bè:', msg);
+      });
+    }
+
+    // Tạo link hàng loạt
+    function generateBatchLinks() {
+      const rawText = document.getElementById('batch-names-input').value;
+      const greeting = document.getElementById('batch-greeting-select').value;
+      const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+
+      if (lines.length === 0) {
+        showToast('Vui lòng nhập ít nhất một tên khách!');
+        return;
+      }
+
+      const base = getBaseUrl();
+      const mainPage = base ? `${base}/index.html` : 'index.html';
+
+      currentBatchData = lines.map(name => {
+        const link = `${mainPage}?guest=${encodeURIComponent(name)}&greeting=${encodeURIComponent(greeting)}`;
+        return { name, link };
+      });
+
+      renderBatchList();
+      document.getElementById('result-batch').classList.add('active');
+      showToast(`Đã tạo xong ${currentBatchData.length} link mời!`);
+    }
+
+    // Hiển thị danh sách hàng loạt
+    function renderBatchList() {
+      const container = document.getElementById('batch-list-container');
+      const countText = document.getElementById('batch-count-text');
+      countText.textContent = `Tổng cộng: ${currentBatchData.length} khách mời`;
+
+      container.innerHTML = currentBatchData.map((item, idx) => `
+        <div class="guest-card-item">
+          <div class="guest-info">
+            <div class="guest-name-text">${escapeHtml(item.name)}</div>
+            <div class="guest-link-snippet">${escapeHtml(item.link)}</div>
+          </div>
+          <div class="guest-actions">
+            <button class="btn-icon-sm" onclick="copySpecificLink(${idx})" title="Sao chép link">
+              <i class="fa-regular fa-copy"></i> Copy
+            </button>
+            <a href="${item.link}" target="_blank" class="btn-icon-sm" title="Xem thử thiệp">
+              <i class="fa-solid fa-eye"></i> Xem
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function copySpecificLink(idx) {
+      const item = currentBatchData[idx];
+      if (!item) return;
+      navigator.clipboard.writeText(item.link).then(() => {
+        showToast(`Đã copy link của "${item.name}"`);
+      });
+    }
+
+    function copyAllBatchLinks() {
+      if (currentBatchData.length === 0) return;
+      const allText = currentBatchData.map(item => `${item.name}: ${item.link}`).join('\n');
+      navigator.clipboard.writeText(allText).then(() => {
+        showToast('Đã copy toàn bộ danh sách tên và link!');
+      });
+    }
+
+    // Hiển thị Toast
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const text = document.getElementById('toast-text');
+      text.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

@@ -123,7 +123,9 @@ function renderContentFromConfig() {
 function handleGuestNameFromURL() {
   const urlParams = new URLSearchParams(window.location.search);
   const guestParam = urlParams.get('guest') || urlParams.get('to') || urlParams.get('name') || urlParams.get('u');
+  const greetingParam = urlParams.get('greeting') || urlParams.get('g');
   const guestDisplay = document.getElementById('guest-name');
+  const greetingDisplay = document.getElementById('invitation-greeting');
   
   if (guestDisplay) {
     if (guestParam) {
@@ -131,6 +133,10 @@ function handleGuestNameFromURL() {
     } else if (typeof WEDDING_CONFIG !== 'undefined' && WEDDING_CONFIG.event.defaultGuestName) {
       guestDisplay.textContent = WEDDING_CONFIG.event.defaultGuestName;
     }
+  }
+
+  if (greetingDisplay && greetingParam) {
+    greetingDisplay.textContent = decodeURIComponent(greetingParam);
   }
 }
 
