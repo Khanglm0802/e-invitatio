@@ -130,6 +130,18 @@ function handleGuestNameFromURL() {
   if (guestDisplay) {
     if (guestParam) {
       guestDisplay.textContent = decodeURIComponent(guestParam);
+      
+      // Khách mời mở thiệp: ẩn nút chỉnh sửa để giữ sự trang trọng
+      const editBtn = document.getElementById('btn-open-customizer');
+      if (editBtn) editBtn.style.display = 'none';
+      const linkGenBtn = document.getElementById('btn-goto-link-gen');
+      if (linkGenBtn) linkGenBtn.style.display = 'none';
+
+      // Tự động điền sẵn tên khách vào form xác nhận RSVP
+      const rsvpName = document.getElementById('rsvp-name');
+      if (rsvpName && !rsvpName.value) {
+        rsvpName.value = decodeURIComponent(guestParam);
+      }
     } else if (typeof WEDDING_CONFIG !== 'undefined' && WEDDING_CONFIG.event.defaultGuestName) {
       guestDisplay.textContent = WEDDING_CONFIG.event.defaultGuestName;
     }

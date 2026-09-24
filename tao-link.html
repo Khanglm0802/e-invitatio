@@ -571,8 +571,7 @@
       if (!name) return;
 
       const base = getBaseUrl();
-      const mainPage = base ? `${base}/index.html` : 'index.html';
-      const url = `${mainPage}?guest=${encodeURIComponent(name)}&greeting=${encodeURIComponent(greeting)}`;
+      const url = `${base}/?guest=${encodeURIComponent(name)}&greeting=${encodeURIComponent(greeting)}`;
 
       currentGeneratedUrl = url;
       currentGuestName = name;
@@ -594,10 +593,25 @@
       });
     }
 
-    // Chia sẻ / Copy tin nhắn gửi bạn bè
+    // Chia sẻ / Gửi qua Zalo, Messenger hoặc Copy tin nhắn
     function shareViaApp() {
       if (!currentGeneratedUrl) return;
       const msg = `Thương gửi ${currentGuestName},\nMình xin gửi thiệp mời tham dự ngày vui của mình nhé! Bạn mở link này để xem thiệp và xác nhận giúp mình nha:\n👉 ${currentGeneratedUrl}`;
+
+      if (navigator.share) {
+        navigator.share({
+          title: `Thiệp mời - ${currentGuestName}`,
+          text: msg,
+          url: currentGeneratedUrl
+        }).catch(() => {
+          copyMessageFallback(msg);
+        });
+      } else {
+        copyMessageFallback(msg);
+      }
+    }
+
+    function copyMessageFallback(msg) {
       navigator.clipboard.writeText(msg).then(() => {
         showToast('Đã sao chép lời nhắn kèm link! Hãy dán vào Zalo/Messenger.');
       }).catch(() => {
@@ -617,10 +631,9 @@
       }
 
       const base = getBaseUrl();
-      const mainPage = base ? `${base}/index.html` : 'index.html';
 
       currentBatchData = lines.map(name => {
-        const link = `${mainPage}?guest=${encodeURIComponent(name)}&greeting=${encodeURIComponent(greeting)}`;
+        const link = `${base}/?guest=${encodeURIComponent(name)}&greeting=${encodeURIComponent(greeting)}`;
         return { name, link };
       });
 
