@@ -162,7 +162,7 @@ const WEDDING_CONFIG = {
   // --- ÂM NHẠC NỀN ---
   music: {
     enabled: true,
-    audioSrc: "music.mp3", // File nhạc MP3 trong thư mục
+    audioSrc: "music2.mp3", // File nhạc MP3 trong thư mục
     songTitle: "Melody of Joy",
     artist: "Acoustic Romantic"
   },
