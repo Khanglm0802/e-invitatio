@@ -19,7 +19,7 @@ const WEDDING_CONFIG = {
     pageTitle: "Thiệp Mời - Khoảnh Khắc Rực Rỡ",
     shareTitle: "Mẫu Thiệp Cho Khoảng Khắc Rực Rỡ",
     shareDescription: "Thiết kế nhẹ nhàng, tinh tế dành cho ngày đặc biệt ghi dấu hành trình đáng nhớ.",
-    favicon: "images/cap-icon.png"
+    favicon: "inmages2/cap_icon.png"
   },
 
   // --- LOẠI SỰ KIỆN & CHỦ NHÂN ---
@@ -67,49 +67,51 @@ const WEDDING_CONFIG = {
   // --- HÌNH ẢNH TOÀN BỘ WEBSITE ---
   images: {
     // 1. Ảnh chân dung chính ở đầu trang
-    heroPortrait: "images/hero-portrait.webp",
+    heroPortrait: "inmages2/hero-portrait.jpg",
 
     // 2. Ảnh chân dung phần lời ngỏ / câu chuyện
-    storyPortrait: "images/story-portrait.webp",
+    storyPortrait: "inmages2/story-portrait.jpg",
 
     // 3. Chuỗi ảnh chạy cuộn vô tận (Filmstrip Marquee)
     marqueePhotos: [
-      "images/marquee-1.webp",
-      "images/marquee-2.webp",
-      "images/marquee-3.webp",
-      "images/marquee-4.webp"
+      "inmages2/marquee-1.jpg",
+      "inmages2/marquee-2.jpg",
+      "inmages2/marquee-3.jpg",
+      "inmages2/gallery-1.jpg",
+      "inmages2/hero-portrait.jpg",
+      "inmages2/story-portrait.jpg"
     ],
 
     // 4. Album kỷ niệm / Ảnh Gallery (Bấm vào xem phóng to toàn màn hình)
     galleryPhotos: [
       {
-        src: "images/gallery-1.webp",
-        caption: "Những nụ cười rạng rỡ của thanh xuân"
+        src: "inmages2/hero-portrait.jpg",
+        caption: "Nụ cười rạng rỡ của thanh xuân"
       },
       {
-        src: "images/gallery-2.webp",
-        caption: "Từng bước chân trên giảng đường yêu dấu"
+        src: "inmages2/gallery-1.jpg",
+        caption: "Những góc nhỏ thân quen tại giảng đường"
       },
       {
-        src: "images/gallery-3.webp",
-        caption: "Khoảnh khắc đón nhận niềm hạnh phúc"
+        src: "inmages2/marquee-1.jpg",
+        caption: "Từng trang sách mở ra những ước mơ"
       },
       {
-        src: "images/gallery-4.webp",
-        caption: "Bên những người bạn đồng hành tuyệt vời"
+        src: "inmages2/marquee-2.jpg",
+        caption: "Lưu giữ khoảnh khắc thanh xuân tươi đẹp nhất"
       },
       {
-        src: "images/gallery-5.webp",
-        caption: "Lưu giữ thanh xuân rực rỡ nhất"
+        src: "inmages2/marquee-3.jpg",
+        caption: "Sẵn sàng đón nhận những chân trời mới"
       },
       {
-        src: "images/gallery-6.webp",
-        caption: "Sẵn sàng cho một hành trình tương lai mới"
+        src: "inmages2/story-portrait.jpg",
+        caption: "Hành trình trưởng thành và ghi dấu kỷ niệm"
       }
     ],
 
     // 5. Ảnh bìa chân trang Thank You
-    thankYouBanner: "images/thank-you-banner.webp"
+    thankYouBanner: "inmages2/marquee-3.jpg"
   },
 
   // --- PHẦN TÂM SỰ / LỜI NGỎ / STORY ---

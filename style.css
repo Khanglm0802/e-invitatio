@@ -209,10 +209,13 @@ body::before {
 }
 
 .hero-cap-icon {
-  width: 70px;
+  max-width: 90px;
+  max-height: 48px;
+  width: auto;
   height: auto;
+  object-fit: contain;
   margin-top: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
   filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.1));
   animation: fadeInDown 1.2s ease;
 }
@@ -258,6 +261,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 15%;
   border-radius: 20px;
   box-shadow: var(--shadow-medium);
   border: 4px solid #ffffff;
@@ -596,6 +600,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
   transition: transform 0.4s ease;
 }
 
@@ -721,7 +726,7 @@ body::before {
 
 .story-portrait-box {
   width: 100%;
-  height: 280px;
+  height: 320px;
   border-radius: 16px;
   overflow: hidden;
   margin-bottom: 24px;
@@ -732,6 +737,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 15%;
 }
 
 .story-heading {
@@ -814,6 +820,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 20%;
   border-radius: 10px;
   transition: transform 0.4s ease;
 }
@@ -1117,6 +1124,7 @@ body::before {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 18%;
   z-index: 1;
 }
 
