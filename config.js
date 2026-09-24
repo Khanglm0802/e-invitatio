@@ -29,7 +29,7 @@ const WEDDING_CONFIG = {
     badgeBottom: "Ceremony", // Chữ nghệ thuật uốn lượn (VD: Ceremony, Invitation, Happy Day)
     
     // Tên nhân vật chính (Cô dâu & Chú rể HOẶC Người tốt nghiệp / Chủ tiệc)
-    ownerName: "Mai Hoa",
+    ownerName: "Nguyên Mai",
     subName: "Cử Nhân Kinh Tế Quốc Dân", // Hoặc tên Chú Rể / Cô Dâu / Chức danh
 
     // Lời mời mặc định (nếu trên link không có ?guest=...)
@@ -123,7 +123,7 @@ const WEDDING_CONFIG = {
       "Cảm ơn bạn bè, thầy cô và gia đình vì đã cho mình một thanh xuân thật đẹp, nơi mình được học hỏi, được trải nghiệm và được gặp những người thật đặc biệt. Mong rằng dù mai này mỗi chúng ta có đi về những hướng khác nhau, vẫn sẽ luôn nhớ về những ngày tháng tuổi trẻ rực rỡ này.",
       "Cảm ơn vì đã trở thành một phần thật đặc biệt trong thanh xuân của mình!"
     ],
-    signature: "Mai Hoa"
+    signature: "Nguyên Mai"
   },
 
   // --- PHẦN FORM XÁC NHẬN THAM DỰ (RSVP) ---
@@ -147,8 +147,8 @@ const WEDDING_CONFIG = {
       {
         bankName: "MB Bank (Quân Đội)",
         accountNumber: "999988886666",
-        accountHolder: "NGUYEN MAI HOA",
-        qrImage: "https://api.vietqr.io/image/970422-999988886666-compact2.jpg?accountName=NGUYEN%20MAI%20HOA&amount=0"
+        accountHolder: "NGUYEN MAI",
+        qrImage: "https://api.vietqr.io/image/970422-999988886666-compact2.jpg?accountName=NGUYEN%20MAI&amount=0"
       }
     ]
   },
@@ -167,9 +167,9 @@ const WEDDING_CONFIG = {
     artist: "Acoustic Romantic"
   },
 
-  // --- HIỆU ỨNG HOA / TRÁI TIM RƠI ---
+  // --- HIỆU ỨNG BÔNG TUYẾT RƠI ---
   effects: {
-    fallingPetals: true, // Bật/tắt hiệu ứng hoa rơi lãng mạn trên màn hình
-    petalType: "flower" // 'flower' (cánh hoa đào/hoa hồng), 'heart' (trái tim), hoặc 'gold' (bụi vàng lấp lánh)
+    fallingPetals: true, // Bật/tắt hiệu ứng bông tuyết rơi lãng mạn trên màn hình
+    petalType: "snow" // 'snow' (bông tuyết rơi), 'flower' (cánh hoa đào/hoa hồng), 'heart' (trái tim)
   }
 };

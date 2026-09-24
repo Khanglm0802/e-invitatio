@@ -327,7 +327,7 @@ function initAudioPlayer() {
 }
 
 /**
- * Hiệu ứng cánh hoa / trái tim rơi lãng mạn trên Canvas
+ * Hiệu ứng bông tuyết rơi lãng mạn trên Canvas
  */
 function initPetalsEffect() {
   const canvas = document.getElementById('petals-canvas');
@@ -343,27 +343,33 @@ function initPetalsEffect() {
     height = canvas.height = window.innerHeight;
   });
 
-  let petalsEnabled = WEDDING_CONFIG?.effects?.fallingPetals !== false;
-  const petalCount = 28;
-  const petals = [];
+  let snowEnabled = WEDDING_CONFIG?.effects?.fallingPetals !== false;
+  const flakeCount = 38;
+  const flakes = [];
 
-  class Petal {
+  class Snowflake {
     constructor() {
       this.reset();
     }
     reset() {
       this.x = Math.random() * width;
       this.y = Math.random() * -height;
-      this.size = Math.random() * 8 + 6;
-      this.speedY = Math.random() * 1.5 + 0.8;
-      this.speedX = Math.random() * 1.2 - 0.6;
+      this.size = Math.random() * 6 + 3;
+      this.speedY = Math.random() * 1.2 + 0.6;
+      this.speedX = Math.random() * 0.8 - 0.4;
+      this.angle = Math.random() * Math.PI * 2;
+      this.angleSpeed = Math.random() * 0.02 + 0.01;
+      this.swingWidth = Math.random() * 1.5 + 0.5;
       this.rotation = Math.random() * 360;
-      this.rotationSpeed = (Math.random() - 0.5) * 1.8;
-      this.color = Math.random() > 0.4 ? 'rgba(255, 182, 193, 0.7)' : 'rgba(201, 164, 93, 0.65)';
+      this.rotationSpeed = (Math.random() - 0.5) * 1.5;
+      this.opacity = Math.random() * 0.55 + 0.4;
+      // 0: bông tuyết tinh thể 6 cánh, 1: hạt tuyết tròn phát sáng
+      this.type = Math.random() > 0.45 ? 0 : 1;
     }
     update() {
       this.y += this.speedY;
-      this.x += Math.sin(this.y * 0.01) * 0.8 + this.speedX;
+      this.angle += this.angleSpeed;
+      this.x += Math.sin(this.angle) * this.swingWidth + this.speedX;
       this.rotation += this.rotationSpeed;
       if (this.y > height + 20) {
         this.reset();
@@ -373,25 +379,54 @@ function initPetalsEffect() {
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate((this.rotation * Math.PI) / 180);
-      ctx.fillStyle = this.color;
-      ctx.beginPath();
-      // Vẽ cánh hoa mềm mại
-      ctx.ellipse(0, 0, this.size, this.size * 0.55, 0, 0, Math.PI * 2);
-      ctx.fill();
+
+      if (this.type === 0) {
+        // Bông tuyết 6 cánh tinh thể
+        ctx.strokeStyle = `rgba(255, 255, 255, ${this.opacity})`;
+        ctx.lineWidth = Math.max(1, this.size * 0.16);
+        ctx.lineCap = 'round';
+
+        for (let i = 0; i < 6; i++) {
+          ctx.beginPath();
+          ctx.moveTo(0, 0);
+          ctx.lineTo(0, this.size);
+          if (this.size > 4.5) {
+            const bPos = this.size * 0.55;
+            const bLen = this.size * 0.35;
+            ctx.moveTo(0, bPos);
+            ctx.lineTo(-bLen * 0.7, bPos + bLen * 0.7);
+            ctx.moveTo(0, bPos);
+            ctx.lineTo(bLen * 0.7, bPos + bLen * 0.7);
+          }
+          ctx.stroke();
+          ctx.rotate(Math.PI / 3);
+        }
+      } else {
+        // Hạt tuyết phát sáng mềm mại
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${this.opacity})`);
+        grad.addColorStop(0.5, `rgba(224, 242, 254, ${this.opacity * 0.7})`);
+        grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
       ctx.restore();
     }
   }
 
-  for (let i = 0; i < petalCount; i++) {
-    petals.push(new Petal());
+  for (let i = 0; i < flakeCount; i++) {
+    flakes.push(new Snowflake());
   }
 
   function animate() {
     ctx.clearRect(0, 0, width, height);
-    if (petalsEnabled) {
-      for (const p of petals) {
-        p.update();
-        p.draw();
+    if (snowEnabled) {
+      for (const f of flakes) {
+        f.update();
+        f.draw();
       }
     }
     requestAnimationFrame(animate);
@@ -400,9 +435,9 @@ function initPetalsEffect() {
 
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
-      petalsEnabled = !petalsEnabled;
-      toggleBtn.style.color = petalsEnabled ? 'var(--accent-gold)' : 'var(--text-muted)';
-      showToast(petalsEnabled ? 'Đã bật hiệu ứng hoa rơi' : 'Đã tắt hiệu ứng hoa rơi');
+      snowEnabled = !snowEnabled;
+      toggleBtn.style.color = snowEnabled ? 'var(--accent-gold)' : 'var(--text-muted)';
+      showToast(snowEnabled ? 'Đã bật hiệu ứng tuyết rơi ❄️' : 'Đã tắt hiệu ứng tuyết rơi');
     });
   }
 }
@@ -483,7 +518,7 @@ function initRSVPForm() {
       },
       {
         name: "Hoàng Tuấn",
-        text: "Chúc mừng Mai Hoa! Nhất định mình sẽ có mặt để chung vui cùng bạn!",
+        text: "Chúc mừng Nguyên Mai! Nhất định mình sẽ có mặt để chung vui cùng bạn!",
         time: "1 giờ trước"
       }
     );
